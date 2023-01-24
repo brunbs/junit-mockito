@@ -1,4 +1,9 @@
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,33 +50,37 @@ public class CalculatorTest {
 
     @Test
     void testIntegerDivision_WhenDivisionByZero_ShouldThrowArithmeticException() {
-        //Arrange
+        //Arrange - variable inicialization and requirements
         int dividend = 4;
         int divisor = 0;
         String expectedExceptionMessage = "/ by zero";
-        //Act
+
+        //Act - invoke the testing methods
         ArithmeticException actualException = assertThrows(ArithmeticException.class, () -> {
             calculator.integerDivision(dividend, divisor);
         }, "Division by 0 should have thrown Arithmetic Exception");
 
-        //Assert
+        //Assert - returns validations
         assertEquals(expectedExceptionMessage, actualException.getMessage(), "Unexpected exception message");
     }
 
-    @DisplayName("Test 10-5 = 5")
-    @Test
-    void integerSubtraction_WhenTenMinusFive_ShouldReturnFive() {
-        System.out.println("Test 10-5 = 5");
-        //Arrange - variable inicialization and requirements
-        int minuend = 10;
-        int subtrahend = 5;
-        int expectedResult = 5;
-
+    @DisplayName("Test integer subtraction [minuend, subtrahend, exceptedResult]")
+    @ParameterizedTest
+    @MethodSource("integerSubtractionInputParameters")
+    void integerSubtraction_WhenTwoIntegerArguments_ShouldReturnSubtractionOfThem(int minuend, int subtrahend, int expectedResult) {
         //Act - invoke the testing methods
         int actualResult = calculator.integerSubtraction(minuend,subtrahend);
 
         //Assert - returns validations
         assertEquals(expectedResult, actualResult, () -> minuend + " - " + subtrahend + " did not produce " + expectedResult);
+    }
+
+    private static Stream<Arguments> integerSubtractionInputParameters() {
+        return Stream.of(
+                Arguments.of(10, 5, 5),
+                Arguments.of(24, 1, 23),
+                Arguments.of(12, 8, 4)
+        );
     }
 
 }
