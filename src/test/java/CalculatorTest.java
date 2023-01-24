@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Test Math Operations in Calculator Class")
 public class CalculatorTest {
@@ -42,6 +41,21 @@ public class CalculatorTest {
     @Test
     void testIntegerDivision_DisabledTest() {
         fail("Not implemented yet");
+    }
+
+    @Test
+    void testIntegerDivision_WhenDivisionByZero_ShouldThrowArithmeticException() {
+        //Arrange
+        int dividend = 4;
+        int divisor = 0;
+        String expectedExceptionMessage = "/ by zero";
+        //Act
+        ArithmeticException actualException = assertThrows(ArithmeticException.class, () -> {
+            calculator.integerDivision(dividend, divisor);
+        }, "Division by 0 should have thrown Arithmetic Exception");
+
+        //Assert
+        assertEquals(expectedExceptionMessage, actualException.getMessage(), "Unexpected exception message");
     }
 
     @DisplayName("Test 10-5 = 5")
