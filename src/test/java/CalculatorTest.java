@@ -1,15 +1,37 @@
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Test Math Operations in Calculator Class")
 public class CalculatorTest {
 
+    Calculator calculator;
+
+    @BeforeAll
+    static void setup() {
+        System.out.println("Executing @BeforeAll method - this is executed first - must be static");
+    }
+
+    @AfterAll
+    static void cleanup() {
+        System.out.println("Executing @AfterAll method - this is executed last - must be static");
+    }
+
+    @BeforeEach
+    void beforeEachMethod() {
+        System.out.println("Executing @BeforeEach method");
+        calculator = new Calculator();
+    }
+
+    @AfterEach
+    void afterEachMethod() {
+        System.out.println("Executing @AfterEach method");
+    }
+
     @DisplayName("Test 4/2 = 2")
     @Test
     void testIntegerDivision_WhenFourIsDividedByTwo_ShouldReturnTwo() {
-        Calculator calculator = new Calculator();
+        System.out.println("Test 4/2 = 2");
         int result = calculator.integerDivision(4,2);
         assertEquals(2, result, "4 / 2 should result in 2");
     }
@@ -17,12 +39,17 @@ public class CalculatorTest {
     @DisplayName("Test 10-5 = 5")
     @Test
     void integerSubtraction_WhenTenMinusFive_ShouldReturnFive() {
-        Calculator calculator = new Calculator();
+        System.out.println("Test 10-5 = 5");
+        //Arrange - variable inicialization and requirements
         int minuend = 10;
         int subtrahend = 5;
         int expectedResult = 5;
-        int result = calculator.integerSubtraction(minuend,subtrahend);
-        assertEquals(expectedResult, result, () -> minuend + " - " + subtrahend + " did not produce " + expectedResult);
+
+        //Act - invoke the testing methods
+        int actualResult = calculator.integerSubtraction(minuend,subtrahend);
+
+        //Assert - returns validations
+        assertEquals(expectedResult, actualResult, () -> minuend + " - " + subtrahend + " did not produce " + expectedResult);
     }
 
 }
