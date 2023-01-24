@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -81,6 +82,21 @@ public class CalculatorTest {
                 Arguments.of(24, 1, 23),
                 Arguments.of(12, 8, 4)
         );
+    }
+
+    @DisplayName("Test integer subtraction with CSV {minuend, subtrahend, exceptedResult}")
+    @ParameterizedTest
+    @CsvSource( {
+            "33,1,32",
+            "40, 21, 19",
+            "8, 2, 6"
+    } )
+    void integerSubtraction_WhenTwoIntegerArgumentsUsingCSV_ShouldReturnSubtractionOfThem(int minuend, int subtrahend, int expectedResult) {
+        //Act - invoke the testing methods
+        int actualResult = calculator.integerSubtraction(minuend,subtrahend);
+
+        //Assert - returns validations
+        assertEquals(expectedResult, actualResult, () -> minuend + " - " + subtrahend + " did not produce " + expectedResult);
     }
 
 }
