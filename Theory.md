@@ -14,3 +14,8 @@ instance we can use it so we do not repeat the same code in every test
 
 @AfterEach
 Methods with @AfterEach willl be executed after each @Test method. Also used for cleanup purposes like database closing.
+
+Other Annotations:
+
+@CsvFileSource(resources = "/file.csv")
+Used for Csv parameterized tests using an external file
