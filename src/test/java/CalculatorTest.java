@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @DisplayName("Test Math Operations in Calculator Class")
 public class CalculatorTest {
@@ -34,6 +35,13 @@ public class CalculatorTest {
         System.out.println("Test 4/2 = 2");
         int result = calculator.integerDivision(4,2);
         assertEquals(2, result, "4 / 2 should result in 2");
+    }
+
+    @Disabled("TODO: not implemented yet")
+    @DisplayName("Disabled Test")
+    @Test
+    void testIntegerDivision_DisabledTest() {
+        fail("Not implemented yet");
     }
 
     @DisplayName("Test 10-5 = 5")
