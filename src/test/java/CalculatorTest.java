@@ -11,4 +11,11 @@ public class CalculatorTest {
         assertEquals(2, result, "4 / 2 should result in 2");
     }
 
+    @Test
+    void integerSubtraction() {
+        Calculator calculator = new Calculator();
+        int result = calculator.integerSubtraction(10,5);
+        assertEquals(5, result, "10 - 5 should be 5");
+    }
+
 }
